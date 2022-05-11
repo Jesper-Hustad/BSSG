@@ -1,5 +1,11 @@
 # BSSG - Based Static Site Generator
 
+
+# ⚠️ WIP please ignore for now⚠️
+
+![](https://c.tenor.com/BbfKJfP43RwAAAAC/jackhanmer-construction-worker.gif)
+
+
 Finally an SSG that isn't bloated (within NodeJS limits).  
 The entire generator is a single 150 line script that you are free to edit.  
 
