@@ -1,7 +1,14 @@
 {
   "dependencies": {
+    "dom-parser": "^0.1.6",
     "fs-extra": "^10.1.0",
     "glob": "^8.0.1",
     "showdown": "^2.1.0"
+  },
+  "scripts": {
+    "build" : "node bssg.js",
+    "predev" : "node bssg.js",
+    "dev" : "serve public",
+    "watch" : "nodemon -e '*' --watch src --watch layout bssg.js"
   }
 }
