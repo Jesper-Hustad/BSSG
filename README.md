@@ -10,6 +10,7 @@ Current issues are:
 - moving from three directories (`src,public,layout`) to one single directory `public`
 - dev experience is currently buggy and not final
 - code can be heavily refactored/cleaned and made more loosely coupled.
+- need to add examples
 
 
 ## Instructions
