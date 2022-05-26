@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang=en-us>
+
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width,initial-scale=1">
+  <link rel="shortcut icon" href=favicon-32x32.png>
+  <link rel="stylesheet" href="..\_source\atom-one-dark-reasonable.css">
+  <link rel="stylesheet" href="..\_source\style.css">
+  <title>Jesper Hustad</title>
+  <!-- <meta name=title content="Markdown Syntax Guide">
+  <meta name=description content="Sample article showcasing basic Markdown syntax and formatting for HTML elements."> -->
+ 
+</head>
+
+<body>
+  <header><a href="/" class=title>
+      <h2>Jesper Hustad .com</h2>
+    </a>
+    <nav style="margin-top: -5px;">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+
+    </nav>
+  </header>
+
+  <!-- <hr style="border: 1px solid #c7c7c7;margin-top: 17px;"> -->
+  <main>
+    <h1 style="margin-bottom: 0px;">
+      Bouncing DVD logo expression in After Effects
+    </h1>
+    <i><time datetime=2020-01-03 pubdate>
+      2022/03/17
+    </time></i>
+    
+    <content>
+      <article class="markdown-body">
+        <p>This is our goal:</p>
+<p><img src="images/ae-bouncing.webp" alt="" /></p>
+<h2 id="createanexpression">Create an expression</h2>
+<p>Add the element you want bouncing around to your composition
+Find the position property (shortcut is <code>P</code>)
+Hold <code>Alt/Option</code> and click the stopwatch to create an expression
+<img src="images/stopwatch.png" alt="" /></p>
+<h2 id="pasteinthecode">Paste in the code</h2>
+<p>Copy Paste this code into the expression window that appears<br />
+Customize your effect with the first three variables <code>(v, i, o)</code></p>
+<pre class="javascript language-javascript"><code class="hljs javascript language-javascript"><span class="hljs-comment">// customize speed, position and offset here</span>
+<span class="hljs-keyword">var</span> v = <span class="hljs-number">400</span>;     <span class="hljs-comment">//velocity</span>
+<span class="hljs-keyword">var</span> i = [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>];   <span class="hljs-comment">//initial position</span>
+<span class="hljs-keyword">var</span> o = <span class="hljs-number">0</span>;       <span class="hljs-comment">//time offset</span>
+
+
+<span class="hljs-keyword">var</span> f = (time+o) * v                  <span class="hljs-comment">//function</span>
+<span class="hljs-keyword">var</span> t = [i[<span class="hljs-number">0</span>]+f, i[<span class="hljs-number">1</span>]+f];             <span class="hljs-comment">//time x/y</span>
+<span class="hljs-keyword">var</span> d = thisLayer.<span class="hljs-title function_">sourceRectAtTime</span>(); <span class="hljs-comment">//dimensions</span>
+<span class="hljs-keyword">var</span> s = transform.<span class="hljs-property">scale</span>;              <span class="hljs-comment">//scale</span>
+<span class="hljs-keyword">var</span> lw = d.<span class="hljs-property">width</span> *(s[<span class="hljs-number">1</span>]/<span class="hljs-number">100</span>);         <span class="hljs-comment">//layer width</span>
+<span class="hljs-keyword">var</span> lh = d.<span class="hljs-property">height</span>*(s[<span class="hljs-number">0</span>]/<span class="hljs-number">100</span>);         <span class="hljs-comment">//layer height</span>
+<span class="hljs-keyword">var</span> w = thisComp.<span class="hljs-property">width</span> - lw;          <span class="hljs-comment">//screen width</span>
+<span class="hljs-keyword">var</span> h = thisComp.<span class="hljs-property">height</span> - lh;         <span class="hljs-comment">//screen height</span>
+
+<span class="hljs-comment">// cycle count in x and y</span>
+<span class="hljs-keyword">var</span> c = [<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(t[<span class="hljs-number">0</span>]/w), <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(t[<span class="hljs-number">1</span>]/h)];
+
+<span class="hljs-comment">// position in cycle for x and y</span>
+<span class="hljs-keyword">var</span> p = [t[<span class="hljs-number">0</span>] % w, t[<span class="hljs-number">1</span>] % h]
+
+<span class="hljs-comment">//     cycle isOdd ? inversed : original      </span>
+<span class="hljs-keyword">var</span> x = c[<span class="hljs-number">0</span>] %<span class="hljs-number">2</span>==<span class="hljs-number">1</span> ? w - p[<span class="hljs-number">0</span>] : p[<span class="hljs-number">0</span>];
+<span class="hljs-keyword">var</span> y = c[<span class="hljs-number">1</span>] %<span class="hljs-number">2</span>==<span class="hljs-number">1</span> ? h - p[<span class="hljs-number">1</span>] : p[<span class="hljs-number">1</span>];
+
+[x + lw/<span class="hljs-number">2</span>, y + lh/<span class="hljs-number">2</span>]
+</code></pre>
+<h2 id="customstartposition">Custom start position</h2>
+<p>Create a null that will hold our starting position and open it's position property.
+Select the square brackets and parent it to the nulls position.
+Now if you move the Null around at <code>0 seconds</code> the logo will follow.</p>
+<p><img src="images/initial-position.webp" alt="" /></p>
+<h2 id="colorchangeonbounce">Color change on bounce</h2>
+<p>Since After Effects expressions can not remember state this is tricky.
+Start by adding the <code>Color Balance (HLS)</code> effect to the logo.<br />
+Same as before add an expression by holding Alt/Option on the effects hue property.
+Copy paste this code, where the last part has been altered to work with hue.</p>
+<p>Note that this doesn't work with our custom start position! More on this bellow.</p>
+<pre class="javascript language-javascript"><code class="hljs javascript language-javascript"><span class="hljs-comment">// REMEMBER TO MATCH BOTH EXPRESSIONS! </span>
+<span class="hljs-keyword">var</span> hueShift = <span class="hljs-number">50</span> <span class="hljs-comment">//hue shift</span>
+<span class="hljs-keyword">var</span> v = <span class="hljs-number">400</span>;      <span class="hljs-comment">//velocity</span>
+<span class="hljs-keyword">var</span> i = [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>];    <span class="hljs-comment">//initial position</span>
+<span class="hljs-keyword">var</span> o = <span class="hljs-number">0</span>;        <span class="hljs-comment">//time offset</span>
+
+<span class="hljs-keyword">var</span> f = (time+o) * v                  <span class="hljs-comment">//function</span>
+<span class="hljs-keyword">var</span> t = [i[<span class="hljs-number">0</span>]+f, i[<span class="hljs-number">1</span>]+f];             <span class="hljs-comment">//time x/y</span>
+<span class="hljs-keyword">var</span> d = thisLayer.<span class="hljs-title function_">sourceRectAtTime</span>(); <span class="hljs-comment">//dimensions</span>
+<span class="hljs-keyword">var</span> s = transform.<span class="hljs-property">scale</span>;              <span class="hljs-comment">//scale</span>
+<span class="hljs-keyword">var</span> lw = d.<span class="hljs-property">width</span> *(s[<span class="hljs-number">1</span>]/<span class="hljs-number">100</span>);         <span class="hljs-comment">//layer width</span>
+<span class="hljs-keyword">var</span> lh = d.<span class="hljs-property">height</span>*(s[<span class="hljs-number">0</span>]/<span class="hljs-number">100</span>);         <span class="hljs-comment">//layer height</span>
+<span class="hljs-keyword">var</span> w = thisComp.<span class="hljs-property">width</span> - lw;          <span class="hljs-comment">//screen width</span>
+<span class="hljs-keyword">var</span> h = thisComp.<span class="hljs-property">height</span> - lh;         <span class="hljs-comment">//screen height</span>
+
+<span class="hljs-comment">// cycle count in x and y</span>
+<span class="hljs-keyword">var</span> c = [<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(t[<span class="hljs-number">0</span>]/w), <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(t[<span class="hljs-number">1</span>]/h)];
+
+<span class="hljs-keyword">var</span> bounces = c[<span class="hljs-number">0</span>] + c[<span class="hljs-number">1</span>]
+bounces * hueShift
+</code></pre>
+<h2 id="keepingbothexpressioninsync">Keeping both expression in sync</h2>
+<p>If you change any property in one expression you must do the same for the other!
+If <code>initial position</code> is paired to the null for position, it must also be done for Hue.</p>
+<p><em>Pro tip:</em>
+Apply the <code>Slider Control</code> effect to your element and rename it to <code>velocity slider</code>.
+Pair the velocity property (<code>i</code>) for both expression to the slider, now the speed is always in sync.</p>
+<h2 id="whendoesitperfectlyloop">When does it perfectly loop?</h2>
+<p>Click this <a href="https://codepen.io/jesper-hustad/pen/LYQpWEL?editors=0010">link</a> for a CodePen with some javascript code that finds the next loop frame and a timestamp. You will need to manually put in your data points so it isn't perfect. Unfortunately i couldn't find an easy way to do this in After Effects because it crashes. If anyone knows a way to run a resource intensive expression once please share!  </p>
+<h2 id="enjoythenostalgia">Enjoy the nostalgia</h2>
+<p>Now you have your very own bouncing logo effect, taste that sweet sweet nostalgia!.</p>
+<p><img src="images/cozy-pepe.png" alt="" /></p>
+      </article>
+    </content>
+
+    <!-- <p><a href=>#ma</a><a href=/>#s</a></p> -->
+
+  </main>
+
+  <div class="commentbox"></div>
+  <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+  <script>
+    const dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    commentBox('5724334735753216-proj', {textColor: (dark) ? '#fff' : '#000'})</script>
+  <script>
+    const timer = setTimeout(() => {
+      const e = document.getElementById("commentbox")
+      if(Boolean(e.getAttribute("data-loaded"))){document.querySelector("#root > div > div.branding").remove(); clearTimeout(timer)}
+    }, 100);
+  </script>
+  <style>.branding{display: none;}</style>
+
+  <footer>Built with <a href="https://github.com/Jesper-Hustad/bssg">Based Static Site Generator</a></footer>
+</body>
+
+</html>

@@ -1,25 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-    <div class="markdown-body">
-    <a href="/">← Home</a>
-    <h3>undefined</h3>
-
-    <h1 id="simplepage">Simple page</h1>
-<p>This markdown file was located in the subfolder <code>src/folder/3.md</code><br />
-Any markdown file located in src will be turned into a page.</p>
-    </div>
+    <article class="markdown-body">
+    <h1>Home page</h1>
+    <p>Pages:</p>
+    
+    {{ pages }}
+    </article>
 </body>
-
-
 <style>
-
-
-
-
     @media (prefers-color-scheme: dark) {
 
-    html {
+        html {
         background-color: #0d1117;
     }
 
@@ -1075,5 +1067,4 @@ Any markdown file located in src will be turned into a page.</p>
 		}
 	}
 </style>
-
 </html>

@@ -3,24 +3,9 @@
 <body>
     <div class="markdown-body">
     <a href="/">← Home</a>
-    <h3>2022-05-14</h3>
+    <h3>{{ date }}</h3>
 
-    <h1 id="amarkdownpage">A markdown page</h1>
-<p>This is a page generated from the markdown file <code>src/example.md</code>.<br />
-The title <code>Markdown Example</code> came from the markdown header.<br />
-This is also converted to the url, so this page is located at <code>/markdown-example</code>  </p>
-<p>Because this is just markdown any previewer will work </p>
-<p>The rest of this page includes some examples of markdown features.</p>
-<h2 id="image">Image</h2>
-<p><img src="assets/image.webp" width="200"/></p>
-<h2 id="codeblock">Code block</h2>
-<pre><code class="c language-c">#include &lt;stdio.h&gt;
-int main() {
-   // printf() displays the string inside quotation
-   printf("Hello, World!");
-   return 0;
-}
-</code></pre>
+    {{ content }}
     </div>
 </body>
 

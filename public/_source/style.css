@@ -1,20 +1,4 @@
-<!doctype html>
-<html lang=en-us>
-
-<head>
-  <meta charset=utf-8>
-  <meta name=viewport content="width=device-width,initial-scale=1">
-  <link rel="shortcut icon" href=favicon-32x32.png>
-  <link rel="stylesheet" href="atom-one-dark-reasonable.css">
-  <link rel="stylesheet" href="style.css">
-  <title>Jesper Hustad</title>
-  <!-- <meta name=title content="Markdown Syntax Guide">
-  <meta name=description content="Sample article showcasing basic Markdown syntax and formatting for HTML elements."> -->
- 
-</head>
-
-<style>
-  body {
+body {
     font-family: Verdana, sans-serif;
     margin: auto;
     padding: 20px;
@@ -140,8 +124,12 @@
 
   @media(prefers-color-scheme:dark) {
     body {
-      background-color: rgb(25 28 32);
+      background-color: rgb(19 23 29);
       color: #ddd
+    }
+
+    h2{
+        color: white;
     }
 
     h1,
@@ -181,39 +169,3 @@
       color: #aaa
     }
   }
-  </style>
-
-<body>
-  <header><a href="/" class=title>
-      <h2>Jesper Hustad .com</h2>
-    </a>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/about">About</a>
-
-    </nav>
-  </header>
-  <main>
-    <h1 style="margin-bottom: 0px;">
-      
-    </h1>
-    <i><time datetime=2020-01-03 pubdate>
-      
-    </time></i>
-    
-    <content>
-      <article class="markdown-body">
-        <p>Hi and welcome to my page :)<br>Feel free to read some of my posts.</p>
-        <h2>Posts</h2>
-        {{ pages }}
-      </article>
-    </content>
-
-    <!-- <p><a href=>#ma</a><a href=/>#s</a></p> -->
-
-  </main>
-  <br>
-  <footer>Built with <a href="https://github.com/Jesper-Hustad/bssg">Based Static Site Generator</a></footer>
-</body>
-
-</html>
