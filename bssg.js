@@ -73,6 +73,3 @@ const parseMarkdownFile = filename => {
 const getMetadata = (data,key) => data.filter(i=>i.toLocaleLowerCase().substring(0,key.length)==key).map(i=>i.substring(i.indexOf(":")+1).trim())[0]
 
 main()
-
-
-

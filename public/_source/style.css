@@ -124,7 +124,7 @@ body {
 
   @media(prefers-color-scheme:dark) {
     body {
-      background-color: rgb(19 23 29);
+      background-color: rgb(25 28 32);
       color: #ddd
     }
 
